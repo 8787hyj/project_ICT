@@ -8,7 +8,23 @@
 
 # 소개
 
-# 경력
+# 스킬
+### HTML/Css
+- 시맨틱
+- DOM & BOM
+- Ajax
+### JAVA
+- 개념
+- 클래스
+- JDBC
+### JSP
+- Servlet
+- Handler
+- Connection Pool
+### Spring Framework
+- DI
+- AOP
+- MVC
 
 # 프로젝트
 
