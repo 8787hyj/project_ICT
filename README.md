@@ -3,7 +3,7 @@
 ###### 홍연주
 ###### Hong Yeon ju
 ###### Email : 8787hyj@gmail.com
-###### Git 프로필 : 
+
 
 # 소개
 
