@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 맵핑될 DAO 인터페이스의 Full name 을 줍니다. -->
+<mapper namespace="com.epbooks.www.member.service.impl.MemberDao"> 
+
+	<!-- 로그인 -->
+	<select id="selectById" resultType="Member" parameterType="String">
+		SELECT * FROM member WHERE memberid = #{MEMBERID}
+	</select>
+	
+	<!-- 회원 리스트 -->
+	<select id="selectMemberAllDao" resultType="Member" parameterType="String">
+		SELECT * FROM member
+	</select>
+
+		
+	<select id="selectMemberByIdCount" resultType="int">
+		SELECT COUNT(*) FROM member WHERE memberid = #{memberid} AND PASSWORD = #{password}
+	</select>
+	
+
+	<delete id="deleteMember">
+		DELETE FROM member WHERE memberid = #{memberid} AND password = #{password}
+	</delete>
+
+</mapper>

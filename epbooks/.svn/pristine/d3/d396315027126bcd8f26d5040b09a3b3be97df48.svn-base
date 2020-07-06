@@ -1,0 +1,135 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <c:if test="${empty booklist}">
+	<p>책 정보가 없습니다.</p>
+  </c:if>
+  <c:if test="${! empty booklist}">
+    <table>
+        <tr>
+            <th>ISBN</th><th>제목</th>
+            <th>가격</th><th>작가번호</th>
+        </tr>
+        <c:forEach var="list" items="${booklist}">
+        <tr>
+            <td>${list.isbn}</td>
+            <td><a class="aa-add-card-btn cart-ajax" href="#" data-isbn="${list.isbn}">${list.title }</a></td>
+            <td>${list.pricesales}</td>
+            <td>${list.authorid}</td>
+        </tr>
+        </c:forEach>
+    </table>
+    </c:if>
+    <script type="text/javascript">
+    function go_cart(){
+    	var userDto='${sessionScope.userDto}';
+    	if(userDto==null || userDto==''){
+    		alert("로그인을 먼저 하세요.");
+    		return;
+    	}
+    	/* if(document.formm.quantity.value==""){
+    		alert("수량을 입력하여 주세요.");
+    		document.formm.quantity.focus();
+    	}else{ */
+    		$("input[name=command]").val("cart_insert");
+    		document.formm.submit();
+    	
+    	/* } */
+    	
+    }
+
+    $(function(){
+    	$(".cart-ajax").click(function(event){
+    		event.preventDefault();
+    		var isbn=$(this).attr("data-isbn");
+    		
+    		$.ajax({
+    			url:"addcart/insert",
+    			type:"post",
+    			dataType:"text",
+    			data : {
+    				isbn:isbn,
+    				/* quantity:1 */
+    			},
+    			success:function(result){
+    				console.log(">>>>>>>>>>>>>>>>", result);
+    				 if($.trim(result)=='success'){
+    					if(confirm("장바구니에 담았습니다. 장바구니로 이동하시겠습니까?")){
+    						 location.href="/www"; 
+    					}		
+    				}else if($.trim(result)=='distinct'){
+    					if(confirm("동일한 도서가 장바구니에 담겨있습니다. 수량을 추가 하시겠습니까?")){
+    						$.ajax({
+    			    			url:"addcart/update",
+    			    			type:"get",
+    			    			dataType:"text",
+    			    			data : {
+    			    				isbn:isbn,
+    			    				/* quantity:1 */
+    			    				 	},
+    			    				 	success:function(result){
+    			    				 		if($.trim(result)=='success'){
+    			    	    					if(confirm("장바구니에 담았습니다. 장바구니로 이동하시겠습니까?")){
+    			    	    						 location.href="/www"; 
+    			    	    					}	
+    			    				 		}
+    			    				 	}
+    							}); 
+   						 /* location.href="/www/addcart/update"; */ 
+   						}		
+    				}else{
+    					alert($.trim(result));
+    				} 
+    			}
+    		});
+    	});
+
+    	
+
+    });
+    function go_cart_delete(cseq){
+    	
+    	if(confirm("정말 삭제하시겠습니까?")){
+    		location.href="MacaronicsServlet?command=cart_delete&cseq="+cseq;		
+    	}
+    	
+    }
+
+    function go_cart_all_delete(){
+    	
+    	if(confirm("정말 삭제하시겠습니까?")){
+    		document.form1.submit();
+    	}
+    	
+    }
+
+    function go_cart_ajax_delete(cseq){
+    	
+    	if(confirm("정말 삭제하시겠습니까?")){
+    		
+    		$.ajax({
+    			url:"MacaronicsServlet?command=cart_delete_ajax",
+    			type:"post",
+    			data:{cseq:cseq},
+    			success:function(result){
+    				if($.trim(result)=='success'){
+    					alert("삭제 했습니다.")
+    					location.reload();
+    				}				
+    			}
+    			
+    		});
+    		
+    	}
+    	
+    }
+    </script>
+</body>
+</html>

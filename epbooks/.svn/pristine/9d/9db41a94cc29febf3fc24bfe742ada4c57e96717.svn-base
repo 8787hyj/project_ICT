@@ -1,0 +1,25 @@
+package com.epbooks.www.article.service;
+
+import java.util.List;
+
+import com.epbooks.www.article.dto.Article;
+import com.epbooks.www.article.dto.ArticleContent;
+
+
+public interface ArticleService {
+
+	//select
+	public List<Article> selectArticleAll();
+	
+	//Id로 게시글 찾기
+	//public List<Article> selectArticleById();
+	/*
+	 * //insert public List<Article> insertArticle();
+	 */
+	
+	//write
+	//public void writeArticle(Article article);
+	public void writeArticle(Article article);
+	public void writeArticleContent(ArticleContent articleContent);
+
+}

@@ -1,0 +1,152 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<html>
+<head>
+<title>epBooks</title>
+</head>
+
+
+<!--    Script - Jquery include-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!--    <script src="script/autoRolling.js"></script>-->
+<script src="assets/script/slide.js"></script>
+
+<!--   css Include-->
+<link rel="stylesheet" href="assets/css/slide.css">
+<link rel="stylesheet" href="assets/css/mypage.css">
+<link rel="stylesheet" href="assets/css/autoRolling.css">
+<link rel="stylesheet" href="assets/css/megaMenu.css">
+<link rel="stylesheet" href="assets/css/borderRadius.css">
+
+
+<!--html Include-->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#megaMenu").load("assets/html/megaMenu.html");
+	});
+	//         $(document).ready(function() {
+	//            $("#borderRadi").load("html/borderRadius.html");
+	//        });
+</script>
+<style type="text/css">
+.headerRightMenu ul .headerRightMenuLi {
+	list-style-type: none;
+	float: right;
+}
+
+.headerRightMenuAtag {
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+	margin-left: 20px;
+}
+
+
+</style>
+
+<body>
+
+	<div class="container">
+		<div class="grid header">
+			<p style="margin-bottom: 15px">Header</p>
+			<div class="headerRightMenu">
+				<ul>
+					<li class="headerRightMenuLi"><a href="${pageContext.request.contextPath }/article/form"
+						class="headerRightMenuAtag">고객센터</a></li>
+					<c:if test="${empty authInfo}">
+						<li class="headerRightMenuLi"><a
+							href="${pageContext.request.contextPath }/register/form"
+							class="headerRightMenuAtag">회원가입</a></li>
+					</c:if>
+					<li class="headerRightMenuLi"><a href="${pageContext.request.contextPath }/cart"
+						class="headerRightMenuAtag">장바구니</a></li>
+					<li class="headerRightMenuLi"><a
+						href="${pageContext.request.contextPath }/select/all"
+						class="headerRightMenuAtag">마이페이지</a></li>
+					<c:if test="${empty authInfo}">
+						<li class="headerRightMenuLi"><a
+							href="${pageContext.request.contextPath }/login"
+							class="headerRightMenuAtag">로그인</a></li>
+					</c:if>
+					<c:if test="${! empty authInfo}">
+						<li class="headerRightMenuLi"><a
+							href="${pageContext.request.contextPath }/logout"
+							class="headerRightMenuAtag">로그아웃</a></li>
+						<li class="headerRightMenuLi"><a class="headerRightMenuAtag">${authInfo.name }
+								님 환영합니다.</a></li>
+					</c:if>
+				</ul>
+			</div>
+			<div id="megaMenu"></div>
+		</div>
+		<!--        <div class="grid header2">sidebar>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>></div>-->
+		<div class="grid sidebar">
+			<div class="left-sidebar-firstdiv" style="background-color: red;">
+				<h3>주문내역</h3>
+				<ul>
+					<li><a href="#" class="ml">주문 조회/변경/취소</a></li>
+					<li><a href="#" class="ml">기프티북 내역</a></li>
+					<li><a href="#" class="ml">eBook 구매목록</a></li>
+					<li><a href="#" class="ml">독자북펀드 참여 내역</a></li>
+					<li><a href="#" class="ml">반품/교환 내역</a></li>
+					<li><a href="#" class="ml">전체 취소 주문 내역</a></li>
+					<li><a href="#" class="ml">매장 구매 전자영수증</a></li>
+				</ul>
+			</div>
+			<div class="left-sidebar-firstdiv" style="background-color: green;">
+				<h3>회원정보관리</h3>
+				<ul>
+					<li><a href="#" class="ml">개인정보 수정</a></li>
+					<li><a href="#" class="ml">멤버십 조회</a></li>
+					<li><a href="#" class="ml">이벤트 당첨 내역</a></li>
+					<li><a href="#" class="ml">회원탈퇴</a></li>
+					<li><a href="#" class="ml">배송주소록</a></li>
+					<li><a href="#" class="ml">마이리뷰/페이퍼관리</a></li>
+				</ul>
+			</div>
+			<div class="left-sidebar-firstdiv" style="background-color: purple;">
+				<h3>알림 설정</h3>
+				<ul>
+					<li><a href="#" class="ml">뉴스레터/문자수신</a></li>
+					<li><a href="#" class="ml">저자/시리즈/분야/출판사 신간 알리미</a></li>
+					<li><a href="#" class="ml">재출간/입고/예약판매 알리미</a></li>
+					<li><a href="#" class="ml">중고 등록 알리미</a></li>
+					<li><a href="#" class="ml">전자책 출간 알리미</a></li>
+				</ul>
+			</div>
+
+		</div>
+		<div class="grid extra">
+			<div class="extra-first-div">
+				<p>${authInfo.name }님의쇼핑 정보</p>
+			</div>
+			<div class="extra-first-div">
+				<%-- <c:if test="${! empty authInfo}"> --%>
+
+				<div class="extra-second-div" style="width: 200px;">회원등급일반</div>
+				<div class="extra-second-div">
+					<div class="in-extra-second-div">진행중 주문건</div>
+					<div class="in-extra-second-div">쿠폰</div>
+					<div class="in-extra-second-div">반딧불</div>
+					<div class="in-extra-second-div">적립금</div>
+					<div class="in-extra-second-div">예치금</div>
+					<div class="in-extra-second-div">전환금</div>
+					<div class="in-extra-second-div">복리후생</div>
+				</div>
+			</div>
+			<%-- </c:if> --%>
+		</div>
+		
+		<!-- 구매내역 리스트를 뿌려줄 부분 -->
+		<div class="grid content">
+		
+		</div>
+		<div class="grid content2">Main Content2</div>
+
+		<div class="grid footer">Footer</div>
+	</div>
+
+</body>
+</html>

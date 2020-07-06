@@ -1,0 +1,7 @@
+package com.epbooks.www.article.service.impl;
+
+import com.epbooks.www.article.service.ArticleService;
+
+public class ArticleServiceImpl implements ArticleService{
+
+}

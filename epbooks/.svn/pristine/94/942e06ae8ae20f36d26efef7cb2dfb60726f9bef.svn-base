@@ -1,0 +1,32 @@
+package com.epbooks.www.member.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.epbooks.www.member.service.MemberRegisterRequest;
+import com.epbooks.www.member.service.MemberService;
+
+@Controller
+@RequestMapping("/register") // 루트 밑에 register로 들어오는 요청은 이 컨트롤러가 처리함 
+//ex) localhost8080:/www/register
+public class MemberRegisterController {
+	
+	@Autowired
+	private MemberService memberService;
+
+
+	@GetMapping("/form")
+	public String registerForm() {
+		return "memberRegisterForm";
+	}
+	
+	@PostMapping("/registerdo")
+	public String register(MemberRegisterRequest memberRegisterRequest) {
+		memberService.registerMember(memberRegisterRequest);
+		return "redirect:/"; //DB에 form에서 받은 파라미터 값이 성공적으로 저장되면, 메인화면으로 돌려보낸다.
+	}
+//	
+}

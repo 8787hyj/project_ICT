@@ -1,0 +1,82 @@
+package com.epbooks.www.config;
+
+import java.util.List;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
+@Configuration
+@EnableWebMvc
+@ComponentScan("com.epbooks.www")
+public class WebMvcConfig implements WebMvcConfigurer  {
+
+	@Override
+	public void configureDefaultServletHandling(
+			DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
+	}
+
+	// view 매핑 - view 매핑을 함으로써 reture "login"; 이런식으로 했을때 알아서 경로를 찾아가서 페이지를 보여줌
+	@Override
+	public void configureViewResolvers(ViewResolverRegistry registry) { 
+		// jsp 파일의 위치(경로)와, 이 위치에 있는 파일들은 모두 jsp확장자 라고 설정해 줌.
+		registry.jsp("/WEB-INF/views/", ".jsp");
+	}
+
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/epbooks").setViewName("epbooks");
+	}
+
+	// resources 매핑 - 매핑을 해주지 않으면 file로 인식하지 않고 URL 경로로 인식하여 404오류 발생
+	@Override 
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {  
+		//addResourceHandler("/css/**") : css 폴더(경로)에 있는 모든 파일
+		//addResourceLocations("/WEB-INF/views/css/") : css 폴더의 경로를 잡아준다.
+		registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
+		
+	}
+	
+	/*
+	 * @Override public void addInterceptors(InterceptorRegistry registry) {
+	 * registry.addInterceptor(authCheckInterceptor()) .addPathPatterns("/edit/**")
+	 * .excludePathPatterns("/edit/help/**"); }
+	 * 
+	 * @Bean public AuthCheckInterceptor authCheckInterceptor() { return new
+	 * AuthCheckInterceptor(); }
+	 */
+
+	/*
+	 * @Bean public MessageSource messageSource() { ResourceBundleMessageSource ms =
+	 * new ResourceBundleMessageSource(); ms.setBasenames("message.label");
+	 * ms.setDefaultEncoding("UTF-8"); return ms; }
+	 */
+
+	@Override //공통적으로 날짜,시간의 패턴을 정해주기 위함
+	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		ObjectMapper objectMapper = Jackson2ObjectMapperBuilder
+				.json()
+				.featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+				//.serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(formatter))
+				//.deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(formatter))
+				//.simpleDateFormat("yyyy-MM-dd HH:mm:ss")
+				.build();
+		converters.add(0, new MappingJackson2HttpMessageConverter(objectMapper));
+	}
+	
+	
+		
+}

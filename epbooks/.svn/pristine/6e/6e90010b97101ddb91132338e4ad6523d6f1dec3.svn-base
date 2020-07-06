@@ -1,0 +1,152 @@
+
+/* 공통 부분 */
+.container {
+	display: grid;
+	grid-template-columns: 1fr 3fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 15px;
+}
+
+.grid {
+	background-color: #444;
+	color: #fff;
+	padding: 25px;
+	font-size: 3rem;
+}
+
+
+/* header 부분 */
+
+.header {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	padding-bottom: 0;
+	/*         padding-top: 10px;*/
+}
+
+.header2 {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	display: block;
+	word-break: break-all;
+}
+
+
+
+
+/* sidebar 부분 */
+.sidebar {
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 3;
+	grid-row-end: 7;
+	background: blue;
+	display: flex;
+	flex-direction: column;
+	height: 100%
+}
+
+.left-sidebar-firstdiv {
+	flex: 1; /* flex: 1 1 0 */
+	overflow: auto;
+	margin: 10px;
+	line-height: 15px;
+}
+
+.left-sidebar-firstdiv h3 {
+	font-size: 16px;	
+}
+
+.ml {
+	text-decoration: none;
+	font-size: 14px;
+	color: white;
+	z-index: 9999px;
+}
+
+
+/* header 밑 extra bar */
+.extra {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 3;
+	grid-row-end: 4;
+	background: #898989;
+	display: flex;
+	flex-direction: column;
+	z-index: -9999px;
+}
+
+.extra-first-div{
+	display: flex;
+	flex-direction: row;
+	font-size: 14px;
+}
+
+.extra-first-div p {
+	font-size: 20px;
+}
+
+.extra-second-div {
+	display: flex;
+	flex-direction: row;
+	font-size: 14px;
+	margin: 20px;
+	padding: 20px;
+	border: 1px solid black;
+	
+}
+
+.in-extra-second-div {
+	font-size: 14px;
+	border: 1px solid red;
+	padding: 0px 10px 10px 10px;
+	margin:  0px 30px 10px 30px;
+} 
+
+
+/* content 부분 */
+
+.content {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 5;
+	grid-row-end: 6;
+	background: #f5c531;
+	height: 500px;
+}
+
+
+.content2 {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 6;
+	grid-row-end: 7;
+	background: #f5c531;
+	height: 400px;
+}
+
+.content3 {
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 7;
+	grid-row-end: 8;
+	background: #f5c531;
+	/*                  height: 600px;*/
+}
+
+.footer {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 8;
+	grid-row-end: 9;
+	background: #FFA500;
+}
+
+
+
+

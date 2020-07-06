@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>member Login</title>
+</head>
+<body>
+	<form action="login" method="post">
+		아이디 : <input type="text" name="memberid" /><br />
+		비밀번호 : <input type="text" name="password" />
+		<input type="submit" value="로그인" />
+		<br>
+		<a href="searchId">OK 아이디 찾기</a>
+	    <a href="searchPassword">비밀번호 찾기</a>
+	    <a href="">회원가입</a>
+	    <a href="">휴계정조회</a>
+	    <a href="${pageContext.request.contextPath}">OK 메인으로 돌아가기</a>
+	    
+	</form>
+</body>
+</html>

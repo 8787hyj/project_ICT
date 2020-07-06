@@ -1,0 +1,19 @@
+package com.epbooks.www.article.dto;
+
+import java.util.Date;
+
+import org.springframework.lang.Nullable;
+
+public class Article {
+
+	private int articleno;
+	private String memberid;
+	private String title;
+	private Date regdate;
+	@Nullable
+	private Date moddate;
+	@Nullable
+	private int readCnt;
+	private boolean secret;
+
+}

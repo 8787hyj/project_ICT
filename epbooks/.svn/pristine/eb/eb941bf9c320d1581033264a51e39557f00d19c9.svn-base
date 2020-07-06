@@ -1,0 +1,23 @@
+package com.epbooks.www.admin.service.impl;
+
+import java.util.List;
+
+import com.epbooks.www.admin.dto.Admin;
+
+public interface AdminDao {
+
+	//select
+	public List<Admin> selectAdminByIdDao(String adminId);
+	
+//	public List<Admin> selectAdminAllDao();
+	//insert
+	//public void registerMember(Member member);
+	//update
+	
+	//delete
+	
+	//login
+	//public String submit(Member member , HttpSession session);
+		
+		
+}

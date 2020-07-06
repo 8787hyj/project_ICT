@@ -1,0 +1,34 @@
+package com.epbooks.www.book.service.impl;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.epbooks.www.book.dto.Book;
+import com.epbooks.www.book.dto.BookList;
+
+public interface BookDao {
+
+	public Book selectBookById(String isbn);
+
+	public List<Book> selectBookAll();
+
+	public int selectCount();
+
+	public List<Book> selectBookCount(@Param("startrow") int startrow, @Param("size") int size);
+
+	public BookList getBookPage(int pageNum);
+	
+	public BookList getBookPageByCategory(int pageNo, String category);
+
+	public int selectCountByCategory(String category);
+
+	public List<Book> selectBookCountByCategory(@Param("startrow") int startrow,@Param("size") int size, @Param("category")String category);
+
+	public int selectCountSearch(String searchKey);
+
+	public List<Book> selectBookCountSearch(@Param("startrow") int startrow,@Param("size") int size, @Param("searchKey") String searchKey);
+	
+	
+
+}

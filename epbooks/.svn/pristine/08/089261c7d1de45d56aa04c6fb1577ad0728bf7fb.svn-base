@@ -1,0 +1,23 @@
+package com.epbooks.www.admin.dto;
+
+// 관리자 로그인시 사용할 커맨드 객체
+public class AdminInfo {
+
+	private String adminId;    //아이디
+    private String adminPassword;    //비밀번호
+    
+	public AdminInfo(String adminId, String adminPassword) {
+		super();
+		this.adminId = adminId;
+		this.adminPassword = adminPassword;
+	}
+
+	public String getAdminId() {
+		return adminId;
+	}
+
+	public String getAdminPassword() {
+		return adminPassword;
+	}
+
+}

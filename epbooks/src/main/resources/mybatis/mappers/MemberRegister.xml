@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 맵핑될 DAO 인터페이스의 Full name 을 줍니다. -->
+<mapper namespace="com.epbooks.www.memberRegister.service.impl.MemberRegisterDao">
+	
+	<!-- 멤버 회원가입 -->
+	<insert id="registerMember" parameterType="Member">
+		INSERT INTO member(memberid,password,name,email,phone,point)
+		VALUES (#{memberid},#{password},#{name},#{email},#{phone},#{point})
+	</insert>
+ 
+ 	<!-- 아이디 중복 체크 -->
+	<select id="checkSignup" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM member WHERE memberid = #{memberid}
+	</select>
+	
+		<!-- 이메일 중복 체크 -->
+	<select id="checkSignupEmail" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM member WHERE email = #{email}
+	</select>
+	
+	<insert id="registerMemberByKakao" parameterType="Member">
+	INSERT INTO member(memberid,password,name,email,phone,point,KAKAOID) VALUES(#{memberid},#{password},#{name},#{email},#{phone},#{point},#{kakaoid})
+	</insert>
+	
+</mapper>

@@ -1,0 +1,32 @@
+package com.epbooks.www.member.service;
+
+// 로그인시 사용할 커맨드객체
+public class AuthInfo {
+	
+	String memberId;
+	String email;
+	String name;
+	
+	public AuthInfo(String memberId, String email, String name) {
+		this.memberId = memberId;
+		this.email = email;
+		this.name = name;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public String getName() {
+		return name;
+	}
+	
+	
+	
+	
+	
+}

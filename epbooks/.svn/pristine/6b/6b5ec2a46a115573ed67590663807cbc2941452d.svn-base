@@ -1,0 +1,32 @@
+package com.epbooks.www.search.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.epbooks.www.search.dto.User;
+import com.epbooks.www.search.service.IdSearchService;
+
+@Service
+@Transactional
+public class IdSearchServiceImpl implements IdSearchService {
+
+	@Autowired
+	private UserDao userDao;
+
+	@Override
+	public String searchId(User user) {
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> service - User: " + user);
+		String result = "";
+
+		try {
+			result = userDao.searchId(user);
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> service - result: " + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 맵핑될 DAO 인터페이스의 Full name 을 줍니다. -->
+<mapper namespace="com.epbooks.www.memberRegister.service.impl.MemberRegisterDao">
+
+
+	<insert id="registerMember" parameterType="Member">
+		INSERT INTO MEMBER(MEMBERID,PASSWORD,NAME,EMAIL,PHONE,POINT)
+		VALUES (#{memberid},#{password},#{name},#{email},#{phone},#{point})
+
+		<!-- 1. (#{memberid},#{password},#{name},#{email},#{phone}) ==> parametrType을 
+			Member로 지정해줬기 때문에, Member 객체만 매개변수로 받으면 알아서 memeber.memeberid 이런식으로 값을 찾아서 
+			insert 시킴. 2. DTO 변수가 소문자로 memberid로 되어있으면, 대문자 MEMBERID는 에러남 ==> 대소문자 구분을 
+			하는듯 -->
+	</insert>
+
+
+	<!-- 0529 추가함 -->
+	<!-- <select id="idCheck" resultType="int" parameterType="String">
+		SELECT COUNT(memberid)
+		FROM
+		member
+		WHERE
+		memberid = #{memberid}
+	</select> -->
+
+
+
+	
+</mapper>

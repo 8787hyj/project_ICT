@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 비회원 -->
+<mapper namespace="com.epbooks.www.order.service.impl.NonMemberOrderDao">
+		<!-- 비회원 정보 삽입 -->
+		<insert id="insertNonMember" > 
+			insert into nonMember(nonMemberName, nonMemberEmail, nonMemberPhone, nonMemberAddress) 
+			values (#{nonMemberName}, #{nonMemberEmail}, #{nonMemberPhone}, #{nonMemberAddress})
+		</insert> 
+		
+		<!-- 비회원 테이블에서 비회원번호, 비회원 이메일 검색 -->
+		<select id="selectNonMemberID" parameterType="map" resultType="map">
+			select nonMemberID, nonMemberEmail from nonMember where nonMemberEmail = #{nonMemberEmail}
+		</select>
+		
+		<!-- 비회원 이메일 중복 체크 -->
+		<select id="checkEmail" resultType="int" parameterType="String">
+			SELECT COUNT(*) FROM nonMember WHERE nonMemberEmail = #{nonMemberEmail}
+		</select>
+		
+		<!-- 비회원 번호 주문 테이블 삽입 -->
+		<insert id="insertNonMemberOrder"> 
+			insert into bookstoredb.order(nonMemberID) values (#{nonMemberID})
+		</insert>
+		
+		<!-- 비회원 번호로 주문테이블에서 검색 -->
+		<select id="selectNonMemberOrderNo" resultType="int">
+			select orderNo from bookstoredb.order where nonMemberId = #{nonMemberID}
+		</select>
+	
+		<!-- 비회원의 도서 구매수량, 구매일, 주문번호, 책번호를 주문내역 테이블에 삽입 -->
+		<insert id="insertNonMemberOrderList" >
+			insert into bookstoredb.orderList(orderAmount, orderDate, orderNo, ISBN) 
+			values (#{orderAmount}, sysdate(), #{orderNo}, #{ISBN})
+		</insert>
+
+		<!-- 비회원의 주문번호, 제목, 수량, 가격, 구매일 검색 -->
+		<select id="selectnonMemberOrderList" parameterType="map" resultType="map">
+			select order.orderno, books.title, orderlist.orderamount, books.pricesales, orderlist.orderdate 
+			from nonMember
+			join bookstoredb.order
+			on nonmember.nonMemberID = bookstoredb.order.nonMemberID
+			join bookstoredb.orderlist
+			on bookstoredb.order.orderNo = orderlist.orderNo
+			join books
+			on orderlist.ISBN = books.ISBN
+			where nonmember.nonMemberID = #{nonMemberId} and nonmember.nonMemberEmail = #{nonMemberEmail};
+	</select>
+	
+	
+	
+</mapper>

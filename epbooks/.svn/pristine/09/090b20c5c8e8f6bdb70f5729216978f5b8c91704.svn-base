@@ -1,0 +1,5 @@
+package com.epbooks.www.article.service.impl;
+
+public interface ArticleDao {
+
+}

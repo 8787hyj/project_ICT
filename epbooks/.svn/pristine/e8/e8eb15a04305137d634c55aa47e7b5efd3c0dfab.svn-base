@@ -1,0 +1,21 @@
+package com.epbooks.www.member.service.impl;
+
+import java.util.List;
+
+import com.epbooks.www.member.dto.Member;
+
+
+public interface MemberDao {
+	//아이디로 조회
+	public List<Member> selectMemberById(String memberid);
+	//회원 리스트
+	public List<Member> selectMemberAllDao();
+	// insert
+	public void registerMember(Member member);
+	// update
+
+	// delete
+
+	// login
+
+}

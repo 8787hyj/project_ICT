@@ -1,0 +1,7 @@
+package com.epbooks.www.member.service;
+
+public interface MemberService {
+	
+	public AuthInfo selectMemberById(String memberid,String password);
+	public void registerMember(MemberRegisterRequest memberRegisterRequest);
+}

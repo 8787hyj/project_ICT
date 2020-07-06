@@ -1,0 +1,8 @@
+package com.epbooks.www.search.service;
+
+import com.epbooks.www.search.command.User;
+
+public interface IdSearchService {
+
+	public String searchId(User user);
+}

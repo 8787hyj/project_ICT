@@ -1,0 +1,65 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="">
+<a href="booklist">메인</a>&nbsp;&nbsp;&nbsp;<a href="booklist1?category=A">장르1</a>&nbsp;&nbsp;&nbsp;<a href="booklist2?category=B">장르2</a>&nbsp;&nbsp;&nbsp;<a href="booklist3?category=C">장르3</a>&nbsp;&nbsp;&nbsp;<a href="booklist4?category=D">장르4</a>&nbsp;&nbsp;&nbsp;<a href="booklist5?category=E">장르5</a>
+<table border="1">
+	<c:if test="${booklistbycategory.hasNoBooks()}">
+	<tr>
+		<td colspan="4">판매도서가 없습니다.</td>
+	</tr>
+</c:if>
+<c:forEach var="book" items="${booklistbycategory.content}">
+	<tr>
+	<td><a href="google.com">google</a></td>
+	<td>
+		<table>
+			<tr>
+				<td><a href="detail?isbn=${book.ISBN }">${book.title}</a></td>
+			</tr>
+			<tr>
+				<td>${book.author }</td>
+			</tr>
+			<tr>
+				<td>${book.pricesales}</td>
+			</tr>
+		</table>
+	<%-- </td>
+		<td>${book.title}</td>
+		<td>
+		<a href="read.do?no=${book.isbn}&pageNo=${bookList.currentPage}"> 
+		<c:out value="${book.author}"/>
+		</a>
+		${book.author }
+		</td>
+		<td>${book.pricesales}</td>
+	</tr> --%>
+</c:forEach>
+<c:if test="${booklistbycategory.hasBooks()}">
+	<tr>
+		<td colspan="4">
+			<c:if test="${booklistbycategory.startPage > 5}">
+			<a href="booklist1?pageNo=${booklistbycategory.startPage - 5}">[이전]</a>
+			</c:if>
+			<c:forEach var="pNo" 
+					   begin="${booklistbycategory.startPage}" 
+					   end="${booklistbycategory.endPage}">
+			<a href="booklist1?pageNo=${pNo}">[${pNo}]</a>
+			</c:forEach>
+			<c:if test="${booklistbycategory.endPage < booklistbycategory.totalPages}">
+			<a href="booklist1?pageNo=${booklistbycategory.startPage + 5}">[다음]</a>
+			</c:if>
+		</td>
+	</tr>
+</c:if>
+</table>
+</form>
+</body>
+</html>

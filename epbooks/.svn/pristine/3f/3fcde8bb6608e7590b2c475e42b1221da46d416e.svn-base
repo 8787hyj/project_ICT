@@ -1,0 +1,33 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>비밀번호 찾기</title>
+</head>
+<body>
+				
+	<!-- 아이디 찾기 -->
+	<form name="" method="post">
+			이름 :
+			<div>
+				<input type="text" name="inputName_1" placeholder="ex) 홍연주">
+			</div>
+			아이디 :
+			<div>
+				<input type="text" name="inputId_2" placeholder="ex) dd">
+			</div>
+			이메일 :
+			<div>
+				<input type="text" name="inputEmail_2" placeholder="ex) dd@gmail.com">
+			</div>
+			<button id="searchBtn" type="submit" class="btn btn-primary btn-block">확인</button>
+		<a class="btn btn-danger btn-block"	href="${pageContext.request.contextPath}">메인으로 돌아가기</a>
+		
+	</form>
+	
+	<div>패스워드: ${pass }</div>
+				
+</body>
+</html>

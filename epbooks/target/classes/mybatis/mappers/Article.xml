@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.epbooks.www.article.service.impl.ArticleDao">
+
+	<select id="selectArticleAll" resultType="article">
+		select articleNo, memberId, title, regdate, moddate, readCnt, secret from article order by
+		articleNo desc
+	</select>
+
+	<!-- 게시글 상세보기 -->
+	<select id="selectArticleById" resultMap="selectArticleByIdMap">
+		select a.articleNo,
+		a.memberId, a.title, a.regdate, a.secret,ac.content from
+		article a join
+		articlecontent ac on a.articleNo = ac.articleNo where
+		a.articleNo =
+		#{articleNo}
+	</select>
+
+	<resultMap type="map" id="selectArticleByIdMap">
+		<result column="articleNo" property="articleNo" />
+		<result column="memberId" property="memberId" />
+		<result column="title" property="title" />
+		<result column="regdate" property="regdate" />
+		<result column="content" property="content" />
+		<result column="secret" property="secret" />
+	</resultMap>
+	<!-- 게시글 상세보기 끝 -->
+
+	<!-- 게시글 작성 article table insert -->
+	<insert id="articleWrite" parameterType="Article" >
+		insert into
+		article(articleNo, memberId, title, regdate, secret)
+		values (0, #{memberId},
+		#{title}, SYSDATE(), #{secret})
+		<selectKey keyProperty="articleNo" resultType="int" order="AFTER">
+		SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 게시글 작성 articleContent table insert -->
+	<insert id="articleContentWrite" parameterType="Article">
+		insert into
+		articlecontent values(#{articleno}, #{content})
+	</insert>
+
+	<!-- 게시글 수정 article table update -->
+	<update id="modifyArticle" parameterType="Article">
+		UPDATE article SET title = #{title}, moddate = sysdate() WHERE articleNo = #{no}
+	</update>
+
+	<!-- 게시글 수정 articleContent table update -->
+	<update id="modifyArticleContent" parameterType="Article">
+		update articlecontent set content = #{content} where articleNo = #{no}
+	</update>
+	<!-- 조회수 증가 -->
+	<update id="upreadCnt" parameterType="Article">
+		update article set readCnt = readCnt+1 where articleNo = #{no}
+	</update>
+
+	<!-- 게시글 삭제 article table delete -->
+	<delete id="deleteArticle" parameterType="Article">
+		delete from article where articleNo = #{no}
+	</delete>
+
+	<!-- 게시글 삭제 articleContent table delete -->
+	<delete id="deleteArticleContent" parameterType="Article">
+		delete from articlecontent where articleNo = #{no}
+	</delete>
+	<!-- 게시글 리스트 페이징 -->
+	<select id="selectArticleCount" resultType="article">
+		SELECT
+		articleno,
+		memberid,
+		title,
+		regdate,
+		moddate,
+		readCnt,
+		secret
+		FROM article
+		WHERE articleno > 0
+		ORDER BY articleno DESC, regdate DESC
+		LIMIT #{startrow},#{size}
+	</select>
+	
+		<select id="selectCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM ARTICLE
+	</select>
+	
+	<select id="checkSecretArticle" resultType="String">
+		select secret from article where memberid = #{memberId} and articleno = #{noVal};
+	</select>
+	
+</mapper>

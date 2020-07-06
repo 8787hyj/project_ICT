@@ -1,0 +1,44 @@
+package com.epbooks.www.article.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.epbooks.www.article.dto.Article;
+import com.epbooks.www.article.dto.ArticleContent;
+import com.epbooks.www.article.service.ArticleCommand;
+import com.epbooks.www.article.service.ArticleService;
+
+@Service
+public class ArticleServiceImpl implements ArticleService {
+
+	@Autowired
+	ArticleDao articleDao;
+
+	// Article 由ъ뒪�듃
+	@Override
+	public List<Article> selectArticleAll() {
+		return articleDao.selectArticleAll();
+	}
+
+	// Article �옉�꽦
+	@Override
+	public void writeArticle(Article article) {
+//		Article article = new Article(articlecommand.getArticleNo(),articlecommand.getMemberId(),articlecommand.getTitle(),articlecommand.getRegdate());
+		
+		articleDao.articleWrite(article);
+		
+	}
+
+	@Override
+	public void writeArticleContent(ArticleContent articleContent) {
+		articleDao.articleContentWrite(articleContent);	
+	}
+
+	/*
+	 * @Override public List<Article> selectArticleById() { return
+	 * articleDao.selectArticleById(); }
+	 */
+
+}

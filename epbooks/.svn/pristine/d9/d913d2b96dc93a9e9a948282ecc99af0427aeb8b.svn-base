@@ -1,0 +1,10 @@
+package com.epbooks.www.member.service;
+
+import com.epbooks.www.member.command.AuthInfo;
+
+public interface MemberService {
+	
+	// 회원 로그인 id, password
+	public AuthInfo selectMemberById(String memberid,String password);
+	
+}

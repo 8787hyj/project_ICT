@@ -1,0 +1,109 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+</head>
+<body>
+	<form action="registerdo" method="post">
+		<table class="memberRegister" border="1">
+			<tr>
+				<td colspan="2">기본정보 입력</td>
+			</tr>
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" name="memberID" id="memberID" /></td>
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td>
+					<input type="text" name="password" id="password"/>
+					<span>8~15자리의 영문, 숫자만 입력이 가능합니다.</span>
+				</td>
+			</tr>
+			<tr>
+				<td>비밀번호 확인</td>
+				<td>
+					<input type="text" name="password2" id="password2" class="pw" />
+    				<span id="alertSuccess" style="display: none;">비밀번호가 일치합니다.</span>
+   					<span id="alertDanger" style="display: none;">비밀번호가 일치하지 않습니다.</span>
+				</td>
+			</tr>
+
+			<tr>
+				<td>이메일</td>
+				<td><input type="text" name="email" id="email" /></td>
+			</tr>
+
+			<tr>
+				<td>이름</td>
+				<td><input type="text" name="name" id="name" /></td>
+			</tr>
+
+			<tr>
+				<td>휴대전화</td>
+				<td><input type="text" name="phone" id="phone" /></td>
+			<tr>
+			<tr>
+				<td colspan="2">필수 동의 항목</td>
+
+			</tr>
+
+			<tr>
+				<td colspan="2">
+					<input type="checkbox" name="check1">이용약관 <input type="checkbox" name="check2">커뮤니티 이용 약관
+					<input type="checkbox" name="check3">개인 정보 수집 및 이용
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="2">선택 동의 항목</td>
+			</tr>
+
+			<tr>
+				<td colspan="2">온라인 서점에서 제공하는 유익한 쇼핑 정보를 sms와 이메일로 받아보실 수 있습니다.
+					단, 주문/거래 정보 및 주요 정책과 관련된 내용은 수신 동의 여부와 관계없이 발송됩니다. 선택 약관에 동의하지 않으셔도
+					회원가입은 가능하며, 회원가입 후 회원 정보수정 페이지에서 언제든지 수신여부를 변경하실 수 있습니다.
+					<div>
+						<input type="checkbox" name="check_mail">수신을 동의하십니까?
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td colspan="2">
+				<input type="submit" name="register" value="회원가입" /> <input type="reset" name="reset" value="취소" />
+				</td>
+			</tr>
+		</table>
+	</form>
+
+<script type="text/javascript">
+//비밀번호 일치 확인
+  $('.pw').focusout(function () {
+        var pwd1 = $("#password").val();
+        var pwd2 = $("#password2").val();
+        console.log("pwd1 " + pwd1);
+        console.log("pwd2 " + pwd2);
+ 
+        if ( pwd1 != '' && pwd2 == '' ) {
+            null;
+        } else if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                $("#alertSuccess").css('display', 'inline-block');
+                $("#alertDanger").css('display', 'none');
+            } else {
+                alert("비밀번호가 일치하지 않습니다. 비밀번호를 다시 확인해주세요.");
+                $("#alertSuccess").css('display', 'none');
+                $("#alertDanger").css('display', 'inline-block');
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

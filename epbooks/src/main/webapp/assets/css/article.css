@@ -1,0 +1,71 @@
+#atag {
+	text-align : center;
+	
+}
+
+#comment{
+	text-align : center;
+	
+}
+
+#commentWriteDiv{
+	text-align : center;
+}
+
+#commentWriteButton{
+	background-color: #95adbe;
+	border: 1px solid #95adbe !important;
+	cursor: pointer; 
+	color:  #fff;
+}
+.commentWriteButton,.articleButton{
+	background-color: #95adbe;
+	border: 1px solid #95adbe !important;
+	cursor: pointer; 
+	color:  #fff;
+	
+}
+
+.articleButton.a{
+	background-color: #95adbe;
+	border: 30px solid #95adbe !important;
+	padding:2px;
+	cursor: pointer; 
+	color:  #fff;
+	text-decoration: none;
+}
+.articleButton:hover{
+	background-color: #95adbe;
+	border: 1px solid #95adbe !important;
+	cursor: pointer; 
+	color:  #fff;
+	text-decoration: none;
+}
+
+table, tr, td{
+	text-align: center;
+}
+table{
+	width: 500px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+#title{
+	width: 400px;
+}
+
+.articleWrite,td{
+	border: 1px solid #444444;
+}
+
+.commentDelete,.commentWrite{
+	background-color: #95adbe;
+	border: 1px solid #95adbe !important;
+	cursor: pointer; 
+	color:  #fff;
+	}
+
+/* #readTable{
+	width: 100%;
+} */

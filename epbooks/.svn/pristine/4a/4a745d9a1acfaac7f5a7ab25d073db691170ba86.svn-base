@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 맵핑될 DAO 인터페이스의 Full name 을 줍니다. -->
+<mapper namespace="com.epbooks.www.search.service.impl.UserDao"> 
+
+	<!-- 아이디 찾기 -->
+	<select id="searchId" resultType="String" parameterType="com.epbooks.www.search.dto.User">
+		select ifnull(memberID, 0) from bookstoreDB.member 
+        where name = #{inputName_1} and email = #{inputEmail_2}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="searchPassword" resultType="String" parameterType="com.epbooks.www.search.dto.User">
+		select password from bookstoreDB.member 
+		where name = #{inputName_1} and memberID = #{inputId_2} and email = #{inputEmail_2}
+	</select>
+	
+</mapper>

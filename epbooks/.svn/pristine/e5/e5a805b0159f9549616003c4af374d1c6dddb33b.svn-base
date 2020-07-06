@@ -1,0 +1,181 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+<html>
+<head>
+<title>epBooks</title>
+</head>
+
+
+<!--    Script - Jquery include-->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!--    <script src="script/autoRolling.js"></script>-->
+<script src="assets/script/slide.js"></script>
+
+<!--   css Include-->
+<link rel="stylesheet" href="assets/css/slide.css">
+<link rel="stylesheet" href="assets/css/epbooksMain.css">
+<link rel="stylesheet" href="assets/css/autoRolling.css">
+<link rel="stylesheet" href="assets/css/megaMenu.css">
+<link rel="stylesheet" href="assets/css/borderRadius.css">
+
+
+<!--html Include-->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#megaMenu").load("assets/html/megaMenu.html");
+	});
+	//         $(document).ready(function() {
+	//            $("#borderRadi").load("html/borderRadius.html");
+	//        });
+</script>
+<style type="text/css">
+	.headerRightMenu ul .headerRightMenuLi{
+		list-style-type: none;
+		float: right;
+	}
+	.headerRightMenuAtag{
+		text-decoration: none;
+		font-size: 20px;
+		color: white;
+		margin-left: 20px;
+	}
+
+</style>
+
+<body>
+
+	<div class="container">
+		<div class="grid header">
+			<p style="margin-bottom: 15px">Header</p>
+			<div class="headerRightMenu">
+				<ul>
+					<li class="headerRightMenuLi">
+					<a href="#" class="headerRightMenuAtag">고객센터</a>
+					</li>
+					<c:if test="${empty authInfo}"> 
+					<li class="headerRightMenuLi">
+					<a href="${pageContext.request.contextPath }/register/form" class="headerRightMenuAtag">회원가입</a>
+					</li>
+					</c:if>
+					<li class="headerRightMenuLi">
+					<a href="#" class="headerRightMenuAtag">장바구니</a>
+					</li>
+					<li class="headerRightMenuLi">
+					<a href="${pageContext.request.contextPath }/select/all" class="headerRightMenuAtag">마이페이지</a>
+					</li>
+					<c:if test="${empty authInfo}"> 
+					<li class="headerRightMenuLi">
+					<a href="${pageContext.request.contextPath }/login" class="headerRightMenuAtag">로그인</a>
+					</li>
+					</c:if>
+					 <c:if test="${! empty authInfo}"> 
+					 <li class="headerRightMenuLi">
+					<a href="${pageContext.request.contextPath }/logout" class="headerRightMenuAtag">로그아웃</a>
+					</li>
+					<li class="headerRightMenuLi">
+					<a class="headerRightMenuAtag">${authInfo.name } 님 환영합니다.</a>
+					</li>
+					</c:if>
+				</ul>
+			</div>
+			<div id="megaMenu"></div>
+		</div>
+		<!--        <div class="grid header2">HeaderHeaderHeaderHeaderHeaderHeaderHeaderHeaderHeaderHeaderHeaderHeaderHeaderHeader</div>-->
+		<div class="grid sidebar">Sidebar</div>
+		<div class="grid content">
+						<!--Main Content-->
+			<div class="banner">
+				<ul>
+					<li><img src="assets/img/test01.jpg" alt="" width="700px"
+						height="400px"></li>
+					<li><img src="assets/img/test02.jpg" alt="" width="700px"
+						height="400px"></li>
+					<li><img src="assets/img/test03.jpg" alt="" width="700px"
+						height="400px"></li>
+					<li><img src="assets/img/test04.jpg" alt="" width="700px"
+						height="400px"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="grid extra">Extra Content</div>
+		<div class="grid content2">
+			Main Content2
+			<div class="slide">
+				<img src="assets/img/back.png" alt="" id="back" width="100">
+				<ul>
+					<li><img src="assets/img/test01.jpg" alt="" width="300"
+						height="300"></li>
+					<li><img src="assets/img/test02.jpg" alt="" width="300"
+						height="300"></li>
+					<li><img src="assets/img/test03.jpg" alt="" width="300"
+						height="300"></li>
+					<li><img src="assets/img/test04.jpg" alt="" width="300"
+						height="300"></li>
+					<li><img src="assets/img/test01.jpg" alt="" width="300"
+						height="300"></li>
+					<li><img src="assets/img/test02.jpg" alt="" width="300"
+						height="300"></li>
+					<li><img src="assets/img/test03.jpg" alt="" width="300"
+						height="300"></li>
+					<li><img src="assets/img/test04.jpg" alt="" width="300"
+						height="300"></li>
+					<li><img src="assets/img/test01.jpg" alt="" width="300"
+						height="300"></li>
+
+				</ul>
+				<img src="assets/img/next.png" alt="" id="next" width="100">
+			</div>
+		</div>
+		<div class="grid content3">
+			<div id="borderRadi" class="borderRa">
+				<!--Radius start Include가 안먹는다..-->
+				<a class="a_radius" href="#">
+					<div class="box">
+						<img src="assets/img/test03.jpg" alt="" class="profile">
+					</div>
+					<div class="title" style="right: -35px;">삶이 이렇게 변할 줄 몰랐다</div>
+				</a> <a class="a_radius" href="#">
+					<div class="box">
+						<img src="assets/img/test02.jpg" alt="" class="profile">
+					</div>
+					<div class="title" style="right: -35px;">지금 당장 지워야 하는 어플</div>
+				</a> <a class="a_radius" href="#">
+					<div class="box">
+						<img src="assets/img/test01.jpg" alt="" class="profile">
+					</div>
+					<div class="title" style="right: -82px;">작가와의 만남</div>
+				</a> <a class="a_radius" href="#">
+					<div class="box">
+						<img src="assets/img/test04.jpg" alt="" class="profile">
+					</div>
+					<div class="title" style="right: -82px;">작가와의 만남</div>
+				</a> <a class="a_radius" href="#">
+					<div class="box">
+						<img src="assets/img/test03.jpg" alt="" class="profile">
+					</div>
+					<div class="title" style="right: -65px;">코로나 경제 전쟁</div>
+				</a> <a class="a_radius" href="#">
+					<div class="box">
+						<img src="assets/img/test02.jpg" alt="" class="profile">
+					</div>
+					<div class="title" style="right: -92px;">기획 특집</div>
+				</a> <a class="a_radius" href="#">
+					<div class="box">
+						<img src="assets/img/test03.jpg" alt="" class="profile">
+					</div>
+					<div class="title" style="right: -92px;">기획 특집</div>
+				</a> <a class="a_radius" href="#">
+					<div class="box">
+						<img src="assets/img/test01.jpg" alt="" class="profile">
+					</div>
+					<div class="title" style="right: -40px;">AI시대 사람의 조건 휴틸리티</div>
+				</a>
+				<!-- Radius end-->
+			</div>
+		</div>
+		<div class="grid footer">Footer</div>
+	</div>
+
+</body>
+</html>

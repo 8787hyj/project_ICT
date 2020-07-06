@@ -1,0 +1,24 @@
+package com.epbooks.www.article.service.impl;
+
+import java.util.List;
+
+import com.epbooks.www.article.dto.Article;
+import com.epbooks.www.article.dto.ArticleContent;
+import com.epbooks.www.article.service.ArticleCommand;
+
+
+public interface ArticleDao {
+
+	//select
+	public List<Article> selectArticleAll();
+	public List<Article> selectArticleById();
+	
+	//insert
+	public void articleWrite(Article article);
+	public void articleContentWrite(ArticleContent articleContent);
+	
+	//update
+	
+	//delete
+
+}

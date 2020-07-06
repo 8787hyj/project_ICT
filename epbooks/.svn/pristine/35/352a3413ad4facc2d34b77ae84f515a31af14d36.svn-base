@@ -1,0 +1,5 @@
+package com.epbooks.www.mypage.service.impl;
+
+public class MypageDao {
+
+}

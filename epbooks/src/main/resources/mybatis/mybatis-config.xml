@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 여러가지 기본 옵션을 지정합니다. -->
+	<settings>
+		<!-- 필드 속성이 READ_COUNT 처럼 언더 스코어가 있을 때 VO 의 readCount 처럼 카멜 케이스로 변환 되게 합니다. -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<typeAliases>
+		
+		
+		<!-- 관리자 -->
+		<typeAlias alias="Admin" type="com.epbooks.www.admin.dto.Admin"/>
+		
+		<!-- 회원 -->
+		<typeAlias alias="Member" type="com.epbooks.www.member.dto.Member"/>
+		
+		 <!-- 비회원 -->
+    	<typeAlias alias="NonMember" type="com.epbooks.www.order.dto.NonMember" />
+		
+		<!-- 게시판 -->
+    	<typeAlias alias="Comment" type="com.epbooks.www.comment.dto.Comment" />
+     	<typeAlias alias="ArticleList" type="com.epbooks.www.article.dto.ArticleList" />
+     	<typeAlias alias="Article" type="com.epbooks.www.article.dto.Article"/>
+    	<!-- 도서 서비스  -->
+		<typeAlias alias="Book" type="com.epbooks.www.book.dto.Book" />
+     	<typeAlias alias="Booklist" type="com.epbooks.www.book.dto.BookList" />
+      	<typeAlias alias="int" type="java.lang.Integer" />
+      	
+      	<!-- 장바구니 -->
+      	<typeAlias alias="Cart" type="com.epbooks.www.cart.dto.Cart"/>
+    	
+    	<!-- 주문 -->
+    	<typeAlias alias="Order" type="com.epbooks.www.order.dto.Order" />
+      	<typeAlias alias="OrderList" type="com.epbooks.www.order.dto.OrderList" />
+      	
+      	<typeAlias alias="MemberOrder" type="com.epbooks.www.order.dto.MemberOrder"/>
+	  	<typeAlias alias="MemberOrderList" type="com.epbooks.www.order.dto.MemberOrderList" />	 
+	  	
+	  	
+	  	<!-- Board -->
+      	<typeAlias alias="Board" type="com.epbooks.www.board.dto.Board"/>
+      	
+	</typeAliases>	
+	
+</configuration>

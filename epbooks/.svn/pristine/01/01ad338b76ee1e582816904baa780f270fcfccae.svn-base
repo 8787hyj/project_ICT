@@ -1,0 +1,58 @@
+package com.epbooks.www.article.service;
+
+import java.time.LocalDateTime;
+
+public class ArticleCommand {
+
+	int articleno;
+	String memberid;
+	String title;
+	LocalDateTime regdate;
+	
+	public ArticleCommand(int articleno, String memberid, String title, LocalDateTime regdate) {
+		this.articleno = articleno;
+		this.memberid = memberid;
+		this.title = title;
+		this.regdate = regdate;
+	}
+	
+	public ArticleCommand() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getArticleNo() {
+		return articleno;
+	}
+
+	public void setArticlenNo(int articleno) {
+		this.articleno = articleno;
+	}
+
+	public String getMemberId() {
+		return memberid;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberid = memberid;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public LocalDateTime getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(LocalDateTime regdate) {
+		this.regdate = regdate;
+	}
+	
+	
+	
+	
+}

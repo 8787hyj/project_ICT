@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.epbooks.www.comment.service.impl.CommentDao">
+
+	<!-- 댓글 조회 -->
+	<select id="readComment" resultType="Comment">
+		select * from comment where	articleno = #{no}
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="writeComment">
+insert into comment(commentno, commentdate, commentcontent, articleno, adminid) 
+        values(0, sysdate(), #{commentContent}, #{articleNo}, #{adminId});
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteComment">
+		delete from comment where commentno = #{commentNo};
+	</delete>
+	
+	
+	
+</mapper>

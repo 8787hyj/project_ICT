@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 맵핑될 DAO 인터페이스의 Full name 을 줍니다. -->
+<mapper
+	namespace="com.epbooks.www.order.service.impl.MemberOrderDao">
+
+	<insert id="insertMemberOrder" parameterType="MemberOrder"
+		useGeneratedKeys="true" keyProperty="orderNo">
+		INSERT INTO
+		BOOKSTOREDB.ORDER(MEMBERID) VALUES(#{memberId})
+
+	</insert>
+
+	<select id="selectOrderNumLast" resultType="int">
+		SELECT
+		LAST_INSERT_ID() AS ORDERNO
+	</select>
+	<!-- <selectKey resultType="int" order="AFTER" keyColumn="orderNo"> SELECT 
+		LAST_INSERT_ID() AS ORDERNO </selectKey> -->
+
+	<insert id="insertMemberOrderListMap"
+		parameterType="java.util.Map">
+		insert into orderList values(0,#{amount},now(),#{orderNo},#{isbn})
+	</insert>
+
+
+	<select id="selectMemberInfoForChangeMemberInfo"
+		resultMap="selectMemberInfoForChangeMemberInfoMapList">
+
+		select
+		name, address, email, phone, point
+		from member
+		where memberid =
+		#{memberid}
+	</select>
+
+
+	<resultMap type="map"
+		id="selectMemberInfoForChangeMemberInfoMapList">
+		<result column="name" property="name" />
+		<result column="address" property="address" />
+		<result column="email" property="email" />
+		<result column="phone" property="phone" />
+		<result column="point" property="point" />
+	</resultMap>
+
+	<select id="selectMemberOrderNoAll" resultType="int"
+		parameterType="String">
+		SELECT ORDERNO FROM bookstoreDB.ORDER WHERE MEMBERID=#{memberId}
+	</select>
+
+
+
+	<select id="selectMemberOrderList" resultType="MemberOrder"
+		parameterType="MemberOrder">
+		SELECT
+		OL.ORDERLISTNO,OL.ORDERAMOUNT,OL.ORDERDATE,O.ORDERNO,B.TITLE
+		FROM ORDERLIST OL, BOOKS B,BOOKSTOREDB.ORDER O
+		WHERE OL.ISBN=B.ISBN AND O.ORDERNO=OL.ORDERNO AND MEMBERID=#{memberId}
+		ORDER BY ORDERLISTNO DESC LIMIT #{startrow},#{size}
+	</select>
+
+
+	<!-- <select id="selectCountSearch" parameterType="java.util.Map"> SELECT 
+		COUNT(ORDERLISTNO) FROM ORDERLIST WHERE ORDERNO= <foreach collection="list" 
+		item="item" separator=" , "> #{item.ORDERNO}) </foreach> </select> <select 
+		id="selectCountSearch" parameterType="map"> SELECT COUNT(ORDERLISTNO) FROM 
+		ORDERLIST WHERE ORDERNO=#{ORDERNO} </select> -->
+
+	<select id="selectCountSearch" resultType="int"
+		parameterType="String">
+
+		SELECT COUNT(ORDERLISTNO) FROM ORDERLIST OL, BOOKSTOREDB.ORDER O WHERE
+		OL.ORDERNO=O.ORDERNO AND O.MEMBERID=#{memberId}
+
+	</select>
+
+	<select id="selectMemberOrderDetail" resultType="MemberOrder">
+		SELECT
+		OL.ORDERLISTNO,OL.ORDERAMOUNT,OL.ORDERDATE,OL.ORDERNO,B.TITLE,
+		BI.BOOKIMAGEPATH
+		FROM ORDERLIST OL, BOOKS B, BOOKIMAGE BI
+		WHERE OL.ISBN=B.ISBN AND B.ISBN=BI.ISBN AND ORDERLISTNO=#{orderNo};
+	</select>
+
+	<select id="selectMemberOrderBook" resultType="MemberOrder">
+		SELECT
+		ISBN,TITLE,PRICESALES 
+		FROM BOOKS WHERE ISBN=#{isbn}
+	</select>
+	
+
+	<update id="updateMember" parameterType="String">
+		UPDATE MEMBER SET NAME=#{name}, ADDRESS=#{adress}, PHONE=#{phone},
+		EMAIL=#{email} WHERE MEMBERID=#{memberId}
+	</update>
+
+	<!-- 장바구니 관련 쿼리 추가 -->
+	<select id="selectCartForOrder"
+		resultMap="selectCartForOrderMap">
+		select cart.isbn, cart.cartAmount, title, pricesales 
+		from books
+		join cart
+		on books.isbn = cart.isbn
+		where cart.isbn = #{isbn};
+	</select>
+	
+	<resultMap type="map" id="selectCartForOrderMap">
+		<result column="isbn" property="isbn"/>
+		<result column="cartAmount" property="cartAmount"/>
+		<result column="title" property="title"/>
+		<result column="pricesales" property="pricesales"/>
+	</resultMap>
+
+
+</mapper>

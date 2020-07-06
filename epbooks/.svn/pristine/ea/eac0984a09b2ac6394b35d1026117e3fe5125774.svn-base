@@ -1,0 +1,5 @@
+package com.epbooks.www.mypage.service;
+
+public interface MypageService {
+
+}

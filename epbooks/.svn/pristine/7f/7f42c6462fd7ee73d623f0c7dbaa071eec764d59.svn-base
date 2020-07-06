@@ -1,0 +1,39 @@
+package com.epbooks.www.search.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.epbooks.www.search.dto.User;
+import com.epbooks.www.search.service.IdSearchService;
+
+@Controller
+@RequestMapping("/searchId")
+public class SearchController {
+	
+	@Autowired
+	private IdSearchService searchService;
+	
+	@GetMapping 
+	public String loginForm() {
+		return "/user/userSearch";
+	}
+	
+	@PostMapping 
+	public String submit(
+		Model model, 
+		@RequestParam("inputName_1")String inputName_1, 
+		@RequestParam("inputEmail_2")String inputEmail_2) {
+		
+		User user = new User(inputName_1, inputEmail_2);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> controller - User: " + user);
+		String result = searchService.searchId(user);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> controller - result: " + result);
+		model.addAttribute("id", result);
+		return "/user/userSearch";
+	}
+}

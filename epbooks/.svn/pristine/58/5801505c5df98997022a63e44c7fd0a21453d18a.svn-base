@@ -1,0 +1,111 @@
+package com.epbooks.www.article.dto;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
+
+import com.epbooks.www.member.dto.Member;
+
+public class Article {
+
+	private int articleno;
+	private String memberid;
+	private String title;
+	@DateTimeFormat(pattern ="yyyyMMdd")
+	private LocalDateTime regdate;
+	@Nullable
+	private Date moddate;
+	@Nullable
+	private int readCnt;
+	private boolean secret;
+
+	public Article() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Article(int articleno, String memberid, String title, LocalDateTime regdate, boolean secret) {
+		this.articleno = articleno;
+		this.memberid = memberid;
+		this.title = title;
+		this.regdate = regdate;
+		this.secret = secret;
+	}
+
+	public Article(int articleno, String memberid, String title, LocalDateTime regdate) {
+		this.articleno = articleno;
+		this.memberid = memberid;
+		this.title = title;
+		this.regdate = regdate;
+	}
+
+	
+	
+	public Article(String memberid, String title) {
+		this.memberid = memberid;
+		this.title = title;
+	}
+
+	public int getArticleno() {
+		return articleno;
+	}
+
+	public void setArticleno(int articleno) {
+		this.articleno = articleno;
+	}
+
+	public String getMemberid() {
+		return memberid;
+	}
+
+	public void setMemberid(String memberid) {
+		this.memberid = memberid;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public LocalDateTime getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(LocalDateTime regdate) {
+		this.regdate = regdate;
+	}
+
+	public Date getModdate() {
+		return moddate;
+	}
+
+	public void setModdate(Date moddate) {
+		this.moddate = moddate;
+	}
+
+	public int getReadCnt() {
+		return readCnt;
+	}
+
+	public void setReadCnt(int readCnt) {
+		this.readCnt = readCnt;
+	}
+
+	public boolean isSecret() {
+		return secret;
+	}
+
+	public void setSecret(boolean secret) {
+		this.secret = secret;
+	}
+
+	@Override
+	public String toString() {
+		return "Article [articleno=" + articleno + ", memberid=" + memberid + ", title=" + title + ", regdate="
+				+ regdate + ", moddate=" + moddate + ", readCnt=" + readCnt + ", secret=" + secret + "]";
+	}
+}

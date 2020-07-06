@@ -1,0 +1,12 @@
+package com.epbooks.www.admin.service;
+
+import com.epbooks.www.admin.dto.AdminInfo;
+
+public interface AdminInfoService {
+	
+// 로그인시 form에서 받은 아이디와 비밀번호를 매개변수로 받는다.
+// 아이디로 멤버를 조회하고, 조회된 결과로 멤버객체를 생성한다.
+// null 체크와, form에서 받은 비밀번호랑 생성한 멤버(DB에 저장된 정보)를 비교하여 비밀번호가 일치하는지 체크한다.
+// 에러가 없으면  AuthInfo 커맨드 객체에 필요한 정보를 담아서 반환한다.
+	public AdminInfo selectAdminByIdService(String adminId, String adminPassword) throws Exception;
+}

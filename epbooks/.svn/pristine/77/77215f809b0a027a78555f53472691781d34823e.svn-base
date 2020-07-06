@@ -1,0 +1,32 @@
+package com.epbooks.www.search.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.epbooks.www.search.command.User;
+import com.epbooks.www.search.service.PasswordSearchService;
+
+@Service
+@Transactional
+public class PasswordSearchServiceImpl implements PasswordSearchService {
+
+	@Autowired
+	private UserDao userDao;
+	
+	@Override
+	public String searchPassword(User user) {
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> service - User: " + user);
+		String result = "";
+
+		try {
+			result = userDao.searchPassword(user);
+			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> service - result: " + result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+}

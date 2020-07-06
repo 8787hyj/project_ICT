@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.epbooks.www.board.service.impl.BoardDao">
+
+
+	<!-- 게시판 리스트 보기 -->
+	<select id="selectBoardAll" resultType="Board">
+		select 
+			boardNo, 
+			boardTitle, 
+			boardContent, 
+			boardRegdate, 
+			memberId 
+		from board where memberId = #{memberId} order by boardNo desc; 
+	</select>
+	
+	<!-- 게시글 리스트 페이징 -->
+	<select id="selectBoardCount" resultType="board">
+		SELECT
+		boardNo,
+		boardTitle,
+		boardContent,
+		boardRegdate,
+		memberId
+		FROM board
+		WHERE boardNo > 0
+		ORDER BY boardNo DESC, boardRegdate DESC
+		LIMIT #{startrow},#{size}
+	</select>
+	
+	<!-- 게시글 갯수 -->
+	<select id="selectCount" parameterType="int" resultType="int">
+		SELECT COUNT(*) FROM BOARD
+	</select>
+	
+	<!-- 게시판 작성 --> 
+	<insert id="boardWrite" parameterType="Board">
+		insert into board(
+			boardNo, 
+			boardTitle, 
+			boardContent, 
+			boardRegdate,
+			memberId) 
+		values 
+			(0, #{boardTitle}, #{boardContent}, SYSDATE(), #{memberId})
+	</insert>
+	
+	<!-- //게시판 (제목, 내용) 수정 -->
+	<update id="boardModify" parameterType="Board">
+		UPDATE board SET
+			boardTitle = #{title}, 
+	        boardContent = #{content}, 
+	        boardModdate = sysdate() 
+	    WHERE boardNo = #{no}
+	</update>
+	
+	<!-- //게시글 상세보기 -->
+	<select id="selectBoardById" resultMap="selectBoardByIdMap">
+		select 
+			boardNo, 
+			memberId, 
+			boardTitle, 
+			boardRegdate,
+			boardContent 
+		from board where boardNo = #{boardNo}
+	</select>
+	<resultMap type="map" id="selectBoardByIdMap">
+		<result column="boardNo" property="boardNo" />
+		<result column="boardTitle" property="boardTitle" />
+		<result column="boardContent" property="boardContent" />
+		<result column="boardRegdate" property="boardRegdate" />
+		<result column="boardModdate" property="boardModdate" />
+		<result column="memberId" property="memberId" />
+	</resultMap>
+	
+	<!-- 게시글 삭제 boardDelete -->
+	<delete id="boardDelete" parameterType="Board">
+		delete from board where boardNo = #{no}
+	</delete>
+	
+</mapper>

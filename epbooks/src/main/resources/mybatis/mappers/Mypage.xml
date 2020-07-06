@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 맵핑될 DAO 인터페이스의 Full name 을 줍니다. -->
+<mapper namespace="com.epbooks.www.mypage.service.impl.MypageDao">
+	<!-- 구매내역 조회 -->
+	<select id="selectPurchaseHistoryList"
+		resultMap="selectPurchaseHistoryMapList">
+		select
+		orderlist.orderDate,
+		orderlist.orderlistno,
+		books.pricesales,
+		books.title,
+		orderlist.orderAmount
+		from bookstoredb.member
+		join bookstoredb.order
+		on
+		bookstoredb.member.memberID = bookstoredb.order.memberID
+		join
+		bookstoredb.orderlist
+		on bookstoredb.order.orderNo =
+		bookstoredb.orderlist.orderNo
+		join bookstoredb.books
+		on
+		bookstoredb.orderlist.ISBN = bookstoredb.books.ISBN
+		where
+		bookstoredb.member.memberID = #{memberid}
+	</select>
+
+	<resultMap type="map" id="selectPurchaseHistoryMapList">
+		<result column="orderdate" property="orderdate" />
+		<result column="orderlistno" property="orderlistno" />
+		<result column="pricesales" property="pricesales" />
+		<result column="title" property="title" />
+		<result column="orderAmount" property="orderAmount" />
+	</resultMap>
+
+	
+
+<!-- 멤버조회: 개인정보수정 page -->
+	<select id="selectMemberInfoForChangeMemberInfo"
+		resultMap="selectMemberInfoForChangeMemberInfoMapList">
+		select
+		name, address, email, phone
+		from member
+		where memberid = #{memberid}
+	</select>
+
+
+	<resultMap type="map"
+		id="selectMemberInfoForChangeMemberInfoMapList">
+		<result column="name" property="name" />
+		<result column="address" property="address" />
+		<result column="email" property="email" />
+		<result column="phone" property="phone" />
+	</resultMap>
+
+
+	<!-- <update id="updateMemberInfo" parameterType="map" > <selectKey resultType="String" 
+		keyProperty="memberID" order="AFTER"> select email, address, phone from member 
+		where memberid = #{memberid} </selectKey> update member set #{updateColumn} 
+		= #{info} where memberid = #{memberid} </update> -->
+	<update id="updateMemberEmail" parameterType="map">
+		update member set email= #{info} where memberid = #{memberid}
+	</update>
+	<update id="updateMemberAddress" parameterType="map">
+		update member set address= #{info} where memberid = #{memberid}
+	</update>
+	<update id="updateMemberPhone" parameterType="map">
+		update member set phone= #{info} where memberid = #{memberid}
+	</update>
+	
+	
+	<!-- 이미지 select Test -->
+	<select id="selectImg" resultType="String">
+		<!-- select bookimage.bookImagePath from books join bookimage on books.isbn = bookimage.isbn where bookimage.isbn = #{isbn} -->
+		select bookimage.bookImagePath from bookimage
+	</select>
+
+	<!-- <resultMap type="map" id="slectImgMap">
+		<result column="bookImagePath" property="bookImagePath" />
+	</resultMap>
+ -->
+ 
+ 	<!-- 다중 insert Test -->
+ 	
+ 	<insert id="insertTest" parameterType="java.util.Map">
+ 		insert into cart
+ 		values
+ 		<foreach collection="list" item="item" separator=" , ">
+ 			(#{item.cartId},#{item.cartAmount},#{item.isbn},#{item.memberid})
+ 		</foreach>
+ 	</insert>
+	
+</mapper>

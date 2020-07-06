@@ -1,0 +1,124 @@
+package com.epbooks.www.book.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.epbooks.www.book.dto.Book;
+import com.epbooks.www.book.dto.BookList;
+import com.epbooks.www.book.dto.BookListCategory;
+import com.epbooks.www.book.service.BookService;
+import com.epbooks.www.book.service.impl.BookServiceImpl;
+
+@Controller
+@RequestMapping("/book")
+public class BookListController {
+
+	@Autowired
+	private BookService bookservice;
+	private static final Logger logger = LoggerFactory.getLogger(BookServiceImpl.class);
+	
+	@RequestMapping(value = { "/booklist", "/booklist1", "/booklist2", "/booklist3", "/booklist4", "/booklist5" })
+	public String bookList(HttpServletRequest req,
+			HttpServletResponse res, 
+			Model model,
+			@RequestParam(value = "pageNo", required = false) String pageNoVal
+			,@RequestParam(value = "category", required = false) String category
+			) {
+
+		logger.info("category>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+category);
+//		logger.info(">>>>>>>>>>>>>>>>>>>>>>>>pageNoVal"+pageNoVal);
+
+		int pageNo = 1;
+		if (pageNoVal != null) {
+			pageNo = Integer.parseInt(pageNoVal);
+		}
+
+		//logger.info("result>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+result);
+//		logger.info("pageNo>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+pageNo);
+		BookListCategory booklist = bookservice.getBookPage(pageNo);
+		req.setAttribute("booklist", booklist);
+		
+		BookListCategory booklistbycategory = null;
+		
+//		System.out.println("process return");
+		
+		if (req.getServletPath().equals("/book/booklist")) {
+			return "book/bookListMain";
+		}
+		if (req.getServletPath().equals("/book/booklist1")) {
+			
+			if(category==null) {
+				category="A";
+			}
+			logger.info("category>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+category);
+			booklistbycategory = bookservice.getBookPageByCategory(pageNo,category);
+			req.setAttribute("booklistbycategory", booklistbycategory);
+			
+			return "book/bookList1";
+		}
+		if (req.getServletPath().equals("/book/booklist2")) {
+			
+			if(category==null) {
+				category="B";
+			}
+			booklistbycategory = bookservice.getBookPageByCategory(pageNo,category);
+			req.setAttribute("booklistbycategory", booklistbycategory);
+			
+			return "book/bookList2";
+		}
+		if (req.getServletPath().equals("/book/booklist3")) {
+			
+			if(category==null) {
+				category="C";
+			}
+			booklistbycategory = bookservice.getBookPageByCategory(pageNo,category);
+			req.setAttribute("booklistbycategory", booklistbycategory);
+			
+			return "book/bookList3";
+		}
+		if (req.getServletPath().equals("/book/booklist4")) {
+			
+			if(category==null) {
+				category="D";
+			}
+			booklistbycategory = bookservice.getBookPageByCategory(pageNo,category);
+			req.setAttribute("booklistbycategory", booklistbycategory);
+			
+			return "book/bookList4";
+		}
+		if (req.getServletPath().equals("/book/booklist5")) {
+			
+			if(category==null) {
+				category="E";
+			}
+			booklistbycategory = bookservice.getBookPageByCategory(pageNo,category);
+			req.setAttribute("booklistbycategory", booklistbycategory);
+			
+			return "book/bookList5";
+		}
+		return "redirect:/";
+	}
+
+	@GetMapping("/detail")
+		public String bookDetailList(HttpServletRequest req,HttpServletResponse res, Model model,@RequestParam(value = "isbn") String isbn) {
+			
+			isbn = req.getParameter("isbn");
+//			logger.info("isbn>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+isbn);
+				Book bookDetail = bookservice.selectBookById(isbn);
+//				logger.info("bookdetail>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+bookDetail);
+				req.setAttribute("bookdetail", bookDetail);
+				//System.out.println("req.getServletContext(): "+req.getServletContext());
+				return "book/bookDetailPage";
+			}
+
+}

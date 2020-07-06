@@ -1,0 +1,23 @@
+package com.epbooks.www.memberRegister.service.impl;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.epbooks.www.member.dto.Member;
+
+public interface MemberRegisterDao {
+	
+	// insert
+		public void registerMember(Member member);
+		
+		
+		/*
+		 * @Inject private SqlSession sqlSession;
+		 * 
+		 * private static final String namespace =
+		 * "com.epbooks.www.member.service.impl.MemberDAO";
+		 * 
+		 * //아이디 중복체크 public int idCheck(String memberid) throws Exception { return
+		 * sqlSession.selectOne(namespace + ".idCheck", memberid); }
+		 */
+
+}
