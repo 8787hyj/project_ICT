@@ -1,4 +1,0 @@
-db.driver=com.mysql.cj.jdbc.Driver
-db.url=jdbc:mysql://localhost:3306/bookstoredb?characterEncoding=utf8&serverTimezone=UTC
-db.user=bookstore
-db.password=bookstore

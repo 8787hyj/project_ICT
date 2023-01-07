@@ -1,5 +1,0 @@
-package com.epbooks.www.member.exception;
-
-public class WrongIdPasswordException extends RuntimeException {
-
-}
